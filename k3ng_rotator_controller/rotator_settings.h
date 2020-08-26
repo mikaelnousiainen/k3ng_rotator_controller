@@ -2,7 +2,7 @@
 /* -------------------------- rotation settings ---------------------------------------*/
 
 #define AZIMUTH_STARTING_POINT_DEFAULT 180      // the starting point in degrees of the azimuthal rotator - only used for initializing EEPROM the first time the code is run                                               
-#define AZIMUTH_ROTATION_CAPABILITY_DEFAULT 450 // the default rotation capability of the rotator in degrees - only used for initializing EEPROM the first time the code is run
+#define AZIMUTH_ROTATION_CAPABILITY_DEFAULT 360 // the default rotation capability of the rotator in degrees - only used for initializing EEPROM the first time the code is run
 
 /* 
 
@@ -78,8 +78,8 @@ You can tweak these, but read the online documentation!
 #define EL_VARIABLE_FREQ_OUTPUT_HIGH 100    // Frequency in hertz of maximum speed
 
 // Settings for OPTION_AZ_MANUAL_ROTATE_LIMITS
-#define AZ_MANUAL_ROTATE_CCW_LIMIT 0   // if using a rotator that starts at 180 degrees, set this to something like 185
-#define AZ_MANUAL_ROTATE_CW_LIMIT 535  // add 360 to this if you go past 0 degrees (i.e. 180 CW after 0 degrees = 540)
+#define AZ_MANUAL_ROTATE_CCW_LIMIT 179   // if using a rotator that starts at 180 degrees, set this to something like 185
+#define AZ_MANUAL_ROTATE_CW_LIMIT 541  // add 360 to this if you go past 0 degrees (i.e. 180 CW after 0 degrees = 540)
 
 // Settings for OPTION_EL_MANUAL_ROTATE_LIMITS
 #define EL_MANUAL_ROTATE_DOWN_LIMIT -1
@@ -95,19 +95,19 @@ You can tweak these, but read the online documentation!
 #define AZ_PRESET_POT_FULL_CW 0
 #define AZ_PRESET_POT_FULL_CCW 1023
 #define AZ_PRESET_POT_FULL_CW_MAP 180         // azimuth pot fully counter-clockwise degrees
-#define AZ_PRESET_POT_FULL_CCW_MAP 630        // azimuth pot fully clockwise degrees
+#define AZ_PRESET_POT_FULL_CCW_MAP 540        // azimuth pot fully clockwise degrees
 
 #define ENCODER_PRESET_TIMEOUT 5000
 
 // various code settings
-#define AZIMUTH_TOLERANCE 3.0            // rotator will stop within X degrees when doing autorotation
+#define AZIMUTH_TOLERANCE 1.5            // rotator will stop within X degrees when doing autorotation
 #define ELEVATION_TOLERANCE 0.1 //1.0
 #define OPERATION_TIMEOUT 120000        // timeout for any rotation operation in mS ; 120 seconds is usually enough unless you have the speed turned down
 #define TIMED_INTERVAL_ARRAY_SIZE 20
 
-#define LCD_COLUMNS 20 //16
-#define LCD_ROWS 4 //2       // this is automatically set below for HARDWARE_EA4TX_ARS_USB and HARDWARE_M0UPU
-#define LCD_UPDATE_TIME 1000           // LCD update time in milliseconds
+#define LCD_COLUMNS 16 //16
+#define LCD_ROWS 2 //2       // this is automatically set below for HARDWARE_EA4TX_ARS_USB and HARDWARE_M0UPU
+#define LCD_UPDATE_TIME 250           // LCD update time in milliseconds
 #define LCD_HHMM_CLOCK_POSITION LEFT          //LEFT or RIGHT
 #define LCD_HHMMSS_CLOCK_POSITION LEFT          //LEFT or RIGHT
 #define LCD_ALT_HHMM_CLOCK_AND_MAIDENHEAD_POSITION LEFT
@@ -122,34 +122,34 @@ You can tweak these, but read the online documentation!
 #define LCD_SUN_TRACKING_ROW 4                                    // LCD display row for OPTION_DISPLAY_SUN_TRACKING_CONTINUOUSLY
 #define LCD_SUN_TRACKING_UPDATE_INTERVAL 5000
 #define LCD_MOON_OR_SUN_OR_SAT_TRACKING_CONDITIONAL_ROW 3                // LCD display row for OPTION_DISPLAY_MOON_OR_SUN_OR_SAT_TRACKING_CONDITIONAL
-#define SPLASH_SCREEN_TIME 3000
+#define SPLASH_SCREEN_TIME 1500
 #define LCD_PERIODIC_REDRAW_TIME_SECS 0      // set to 0 to totally disable periodically redrawing the screen
 #define LCD_CLEAR_BEFORE_REDRAW 1            // set to 0 to disable doing a clear before redraw
 #define LCD_REDRAW_UPON_COMMANDS 0           // set to 1 to enable screen redraws upon commands and button presses
 
 #define LCD_HEADING_ROW 2
-#define LCD_HEADING_FIELD_SIZE 20
+#define LCD_HEADING_FIELD_SIZE 16
 #define LCD_AZ_ONLY_HEADING_ROW 1
-#define LCD_AZ_ONLY_HEADING_FIELD_SIZE 20
+#define LCD_AZ_ONLY_HEADING_FIELD_SIZE 16
 #define LCD_EL_ONLY_HEADING_ROW 2
-#define LCD_EL_ONLY_HEADING_FIELD_SIZE 20
+#define LCD_EL_ONLY_HEADING_FIELD_SIZE 16
 #define LCD_STATUS_ROW 1
-#define LCD_STATUS_FIELD_SIZE 20
+#define LCD_STATUS_FIELD_SIZE 16
 #define LCD_DIRECTION_ROW 1
 #define LCD_HHMMSS_CLOCK_ROW 1
 #define LCD_HHMM_CLOCK_ROW 1
 #define PARKING_STATUS_DISPLAY_TIME_MS 5000
 
-#define AZ_BRAKE_DELAY 3000            // in milliseconds
-#define EL_BRAKE_DELAY 3000            // in milliseconds
+#define AZ_BRAKE_DELAY 500            // in milliseconds
+#define EL_BRAKE_DELAY 500            // in milliseconds
 
 #define BRAKE_ACTIVE_STATE HIGH
 #define BRAKE_INACTIVE_STATE LOW
 
-#define EEPROM_MAGIC_NUMBER 111
+#define EEPROM_MAGIC_NUMBER 112
 #define EEPROM_WRITE_DIRTY_CONFIG_TIME  30  //time in seconds
 
-#define DISPLAY_DECIMAL_PLACES 0
+#define DISPLAY_DECIMAL_PLACES 1
 
 #define AZ_POSITION_ROTARY_ENCODER_DEG_PER_PULSE 0.5
 #define EL_POSITION_ROTARY_ENCODER_DEG_PER_PULSE 0.5
@@ -203,7 +203,8 @@ You can tweak these, but read the online documentation!
 #define SUN_AOS_ELEVATION_MIN 0
 #define SUN_AOS_ELEVATION_MAX 180
 
-#define LCD_DISPLAY_DEGREES_STRING "\xDF"
+// Degrees character depends on LCD type: either "\xB2" or "\xDF"
+#define LCD_DISPLAY_DEGREES_STRING "\xB2"
 #define NEXTION_DISPLAY_DEGREES_STRING "\xB0"
 
 #define INTERNAL_CLOCK_CORRECTION 0.00145
@@ -252,8 +253,8 @@ You can tweak these, but read the online documentation!
  *
  */
 
-#define AZIMUTH_CALIBRATION_FROM_ARRAY {180,630}            /* these are in "raw" degrees, i.e. when going east past 360 degrees, add 360 degrees*/
-#define AZIMUTH_CALIBRATION_TO_ARRAY {180,630}
+#define AZIMUTH_CALIBRATION_FROM_ARRAY {180,540}            /* these are in "raw" degrees, i.e. when going east past 360 degrees, add 360 degrees*/
+#define AZIMUTH_CALIBRATION_TO_ARRAY {180,540}
 
 // example: reverse rotation sensing
 //   #define AZIMUTH_CALIBRATION_FROM_ARRAY {0,359}
